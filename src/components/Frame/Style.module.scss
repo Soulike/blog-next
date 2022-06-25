@@ -1,0 +1,128 @@
+.Frame {
+    @import '@/src/globalStyle/COLOR.css';
+
+    height: 100vh;
+    width: 100vw;
+
+    .icon {
+        display: inline-block;
+        margin: 0 5px 0 0 !important;
+    }
+
+    .sidebar,
+    .main {
+        overflow: auto;
+    }
+
+    .header {
+        @media (min-width: 501px) {
+            display: none;
+        }
+
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0 3vw;
+        padding-right: calc(3vw - 20px);
+
+        .headerInner {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .avatar {
+                width: 10%;
+                height: 100%;
+                border-radius: 100%;
+            }
+
+            .menu {
+                width: 90%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    .sidebar {
+        /*覆盖 antd*/
+        width: 17vw !important;
+        flex-basis: auto !important;
+        max-width: 17vw !important;
+        min-width: 17vw !important;
+        background-color: var(--BACKGROUND_COLOR);
+        border-right: 1px solid var(--BORDER_COLOR);
+
+        * {
+            background-color: inherit;
+        }
+
+        @media (max-width: 1000px) {
+            width: 125px !important;
+            max-width: 125px !important;
+            min-width: 125px !important;
+        }
+
+        @media (max-width: 500px) {
+            display: none;
+        }
+
+        .sidebarInner {
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            padding: 5vh 2vw;
+            box-sizing: border-box;
+
+            @media (max-width: 1000px) {
+                padding-left: 1vw;
+                padding-right: 1vw;
+            }
+
+            .avatar {
+                width: 75%;
+                height: 100%;
+                border-radius: 100%;
+            }
+
+            .menu {
+                border: none;
+                width: 100%;
+                margin-top: 5vh;
+
+                .item {
+                    margin: 2.5px 0;
+                }
+            }
+        }
+    }
+
+    .main {
+        width: (100vw - 20vw) !important;
+        overflow-x: hidden;
+        background-color: var(--BACKGROUND_COLOR) !important;
+
+        .content {
+            overflow: auto;
+            padding: 2vh 2vw;
+        }
+
+        .footer {
+            text-align: center;
+            background-color: inherit;
+
+            .hitokoto {
+                @media (max-width: 500px) {
+                    display: none;
+                }
+            }
+
+            .info {
+            }
+        }
+    }
+}
