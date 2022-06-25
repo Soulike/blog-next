@@ -1,6 +1,6 @@
 :root {
-    --BACKGROUND_COLOR: #FFF;
-    --BORDER_COLOR: #EEE;
+    --BACKGROUND_COLOR: #fff;
+    --BORDER_COLOR: #eee;
     --COLOR: #000;
     --LIGHT_COLOR: #666;
 }
@@ -9,7 +9,7 @@
     :root {
         --BACKGROUND_COLOR: #222;
         --BORDER_COLOR: #444;
-        --COLOR: #DDD;
+        --COLOR: #ddd;
         --LIGHT_COLOR: #999;
     }
 }
