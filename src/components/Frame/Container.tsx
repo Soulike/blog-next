@@ -4,7 +4,12 @@ import axios from 'axios';
 import {Category} from '@/src/types';
 import {Category as CategoryApi} from '@/src/apis';
 
-export function Frame() {
+export interface IFrameProps {
+    children?: React.ReactNode;
+}
+
+export function Frame(props: IFrameProps) {
+    const {children} = props;
     const [hitokoto, setHitokoto] = useState('这里应该有一句话');
     const [year, setYear] = useState(1970);
     const [categoryList, setCategoryList] = useState([] as Category[]);
@@ -44,10 +49,8 @@ export function Frame() {
     }, []);
 
     return (
-        <FrameView
-            hitokoto={hitokoto}
-            year={year}
-            categoryList={categoryList}
-        />
+        <FrameView hitokoto={hitokoto} year={year} categoryList={categoryList}>
+            {children}
+        </FrameView>
     );
 }
