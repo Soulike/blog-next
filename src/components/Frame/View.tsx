@@ -1,12 +1,14 @@
-import React from 'react';
-import Style from './Style.module.scss';
-import {Layout, Menu} from 'antd';
-import avatar from '@/src/static/avatar.png';
-import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
-import {Category} from '@/src/types';
 import {HomeOutlined, InfoOutlined, TagOutlined, TagsOutlined} from '@ant-design/icons';
-import Link from 'next/link';
+import {Layout, Menu} from 'antd';
 import Img from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+
+import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
+import avatar from '@/src/static/avatar.png';
+import {Category} from '@/src/types';
+
+import Style from './Style.module.scss';
 
 const {Sider, Footer, Content, Header} = Layout;
 

@@ -1,4 +1,5 @@
 import {DependencyList, useEffect} from 'react';
+
 import {loadScript} from '@/src/utils/script';
 
 /**

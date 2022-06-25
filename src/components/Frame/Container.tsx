@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {FrameView} from './View';
 import axios from 'axios';
-import {Category} from '@/src/types';
+import React, {useEffect, useState} from 'react';
+
 import {Category as CategoryApi} from '@/src/apis';
+import {Category} from '@/src/types';
+
+import {FrameView} from './View';
 
 export interface IFrameProps {
     children?: React.ReactNode;

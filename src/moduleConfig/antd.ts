@@ -1,4 +1,5 @@
-import moment from 'moment';
 import 'moment/locale/zh-cn';
+
+import moment from 'moment';
 
 moment.locale('zh-cn');

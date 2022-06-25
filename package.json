@@ -28,6 +28,7 @@
         "eslint": "^8.18.0",
         "eslint-config-next": "^12.1.6",
         "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
         "eslint-plugin-unused-imports": "^2.0.0",
         "husky": "^8.0.1",
         "lint-staged": "^13.0.3",
@@ -42,7 +43,8 @@
             "prettier"
         ],
         "plugins": [
-            "unused-imports"
+            "unused-imports",
+            "simple-import-sort"
         ],
         "rules": {
             "no-unused-vars": "off",
@@ -61,7 +63,9 @@
                 {
                     "includeExports": true
                 }
-            ]
+            ],
+            "simple-import-sort/imports": "error",
+            "simple-import-sort/exports": "error"
         }
     },
     "prettier": {
@@ -73,7 +77,6 @@
         "bracketSameLine": true
     },
     "lint-staged": {
-        "src/*": "prettier --write --ignore-unknown",
-        "src/*.ts": "next lint --fix"
+        "src/*": ["eslint --fix","prettier --write --ignore-unknown"]
     }
 }

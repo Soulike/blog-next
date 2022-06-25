@@ -1,7 +1,9 @@
-import axios, {AxiosResponse} from 'axios';
-import {GET_ABOUT} from './ROUTE';
-import {Response} from '../../types';
 import {message} from 'antd';
+import axios, {AxiosResponse} from 'axios';
+
+import {Response} from '@/src/types';
+
+import {GET_ABOUT} from './ROUTE';
 
 export async function get(): Promise<{about: string} | null> {
     try {

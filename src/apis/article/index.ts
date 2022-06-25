@@ -1,11 +1,13 @@
+import {message} from 'antd';
 import axios, {AxiosResponse} from 'axios';
-import {Article, Response} from '../../types';
+
+import {Article, Response} from '@/src/types';
+
 import {
     GET_ALL_WITH_ABSTRACT,
     GET_BY_CATEGORY_WITH_ABSTRACT,
     GET_BY_ID,
 } from './ROUTE';
-import {message} from 'antd';
 
 export async function getAllWithAbstract(): Promise<Array<Article> | null> {
     try {

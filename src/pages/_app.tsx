@@ -1,9 +1,11 @@
 import '@/src/globalStyle/globalStyle.scss';
 import '@/src/moduleConfig/antd';
+
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import {Suspense} from 'react';
+
 import {Loading} from '@/src/components/Loading';
 
 function MyApp({Component, pageProps}: AppProps) {

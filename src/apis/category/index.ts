@@ -1,7 +1,9 @@
-import {Category, Response} from '../../types';
-import axios, {AxiosResponse} from 'axios';
-import {GET_ALL, GET_BY_ID} from './ROUTE';
 import {message} from 'antd';
+import axios, {AxiosResponse} from 'axios';
+
+import {Category, Response} from '@/src/types';
+
+import {GET_ALL, GET_BY_ID} from './ROUTE';
 
 export async function getAll(): Promise<Array<Category> | null> {
     try {
