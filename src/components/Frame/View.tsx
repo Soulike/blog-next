@@ -5,7 +5,6 @@ import {
     TagsOutlined,
 } from '@ant-design/icons';
 import {Layout, Menu} from 'antd';
-import Img from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -91,8 +90,8 @@ export function FrameView(props: Props) {
             <Sider theme={'light'} className={Style.sidebar}>
                 <div className={Style.sidebarInner}>
                     <div className={Style.avatarWrapper}>
-                        <Img
-                            src={avatar}
+                        <img
+                            src={avatar.src}
                             className={Style.avatar}
                             alt={'avatar'}
                         />
@@ -111,8 +110,8 @@ export function FrameView(props: Props) {
                 <Header className={Style.header}>
                     <div className={Style.headerInner}>
                         <div className={Style.avatarWrapper}>
-                            <Img
-                                src={avatar}
+                            <img
+                                src={avatar.src}
                                 className={Style.avatar}
                                 alt={'avatar'}
                             />
