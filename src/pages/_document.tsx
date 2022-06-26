@@ -5,7 +5,7 @@ export default function Document() {
         <Html lang={'zh-CN'}>
             <Head>
                 <script
-                    async
+                    defer
                     id='mathjax-cdn'
                     src='https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js'
                 />
