@@ -1,4 +1,7 @@
+import '@/src/globalStyle/antd.scss';
+import '@/src/globalStyle/color.scss';
 import '@/src/globalStyle/globalStyle.scss';
+import '@/src/globalStyle/highlight.scss';
 import '@/src/moduleConfig/antd';
 
 import ConfigProvider from 'antd/lib/config-provider';
