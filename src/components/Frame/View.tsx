@@ -121,8 +121,8 @@ export function FrameView(props: Props) {
                             className={Style.menu}
                             mode={'horizontal'}
                             selectable={false}
-                            theme={'dark'}
                             items={menuItems}
+                            theme={'light'}
                         />
                     </div>
                 </Header>
