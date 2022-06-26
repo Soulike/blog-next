@@ -1,13 +1,16 @@
 import Head from 'next/head';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {Option} from '@/src/apis';
+import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 
 import {AboutView} from './View';
 
 export function About() {
     const [about, setAbout] = useState('');
     const [loading, setLoading] = useState(true);
+
+    const markdownConverter = useMarkdownConverter();
 
     useEffect(() => {
         const getAbout = async () => {
@@ -28,7 +31,10 @@ export function About() {
             <Head>
                 <title>关于 - Soulike 的博客</title>
             </Head>
-            <AboutView about={about} loading={loading} />
+            <AboutView
+                aboutHtml={markdownConverter.makeHtml(about)}
+                loading={loading}
+            />
         </>
     );
 }

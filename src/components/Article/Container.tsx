@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {Article as ArticleApi, Category as CategoryApi} from '@/src/apis';
 import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
+import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 import {Article as ArticleClass, Category} from '@/src/types';
 
 import {ArticleView} from './View';
@@ -14,6 +15,8 @@ export function Article() {
     );
     const [category, setCategory] = useState(new Category(0, ''));
     const [loading, setLoading] = useState(true);
+
+    const markdownConverter = useMarkdownConverter();
 
     const router = useRouter();
 
@@ -65,7 +68,7 @@ export function Article() {
             </Head>
             <ArticleView
                 title={title}
-                content={content}
+                contentHtml={markdownConverter.makeHtml(content)}
                 publicationTime={publicationTime}
                 modificationTime={modificationTime}
                 loading={loading}

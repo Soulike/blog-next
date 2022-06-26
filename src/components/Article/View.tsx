@@ -1,16 +1,14 @@
 import {ClockCircleOutlined, TagOutlined} from '@ant-design/icons';
 import {Alert, Skeleton, Tag} from 'antd';
-import React from 'react';
 
 import {ArticleShower} from '@/src/components/ArticleShower';
 import {Category} from '@/src/types';
-import {markdownConverter} from '@/src/utils/markdownConverter';
 
 import Style from './Style.module.scss';
 
 interface Props {
     title: string;
-    content: string;
+    contentHtml: string;
     publicationTime: string;
     modificationTime: string;
     category: Category;
@@ -20,7 +18,7 @@ interface Props {
 export function ArticleView(props: Props) {
     const {
         title,
-        content,
+        contentHtml,
         publicationTime: publicationTimeString,
         modificationTime: modificationTimeString,
         category,
@@ -74,7 +72,7 @@ export function ArticleView(props: Props) {
                     />
                 ) : null}
                 <ArticleShower
-                    HTMLContent={markdownConverter.makeHtml(content)}
+                    HTMLContent={contentHtml}
                 />
             </Skeleton>
         </div>

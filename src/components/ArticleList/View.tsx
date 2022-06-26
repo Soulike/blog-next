@@ -51,7 +51,8 @@ export function ArticleListView(props: Props) {
                         publicationTime,
                         pageViews,
                     } = article;
-                    const text = getFirstSentenceFromMarkdown(content);
+                    const briefTextMarkdown =
+                        getFirstSentenceFromMarkdown(content);
                     const time = new Date(publicationTime);
                     const category = categoryMap.get(categoryId);
 
@@ -63,7 +64,7 @@ export function ArticleListView(props: Props) {
                                 articleTime={time}
                                 articleCategory={category}
                                 articleViewAmount={pageViews}
-                                articleBriefText={text}
+                                articleBriefTextMarkdown={briefTextMarkdown}
                             />
                         </Item>
                     );

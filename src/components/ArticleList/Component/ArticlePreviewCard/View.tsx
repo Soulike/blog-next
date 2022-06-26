@@ -1,10 +1,10 @@
-import {
-    ClockCircleOutlined,
-    EyeOutlined,
-    TagsOutlined,
-} from '@ant-design/icons';
+import
+    {
+        ClockCircleOutlined,
+        EyeOutlined,
+        TagsOutlined
+    } from '@ant-design/icons';
 import {Card, Tag} from 'antd';
-import React from 'react';
 
 import {Category} from '@/src/types';
 
@@ -17,17 +17,17 @@ interface IProps {
     articleTime: Readonly<Date>;
     articleCategory: Readonly<Category> | undefined;
     articleViewAmount: number;
-    articleBriefText: string;
+    articleBriefTextHtml: string;
 }
 
-export function ArticlePreviewCard(props: IProps) {
+export function ArticlePreviewCardView(props: IProps) {
     const {
         articleId,
         articleTitle,
         articleTime,
         articleCategory,
         articleViewAmount,
-        articleBriefText,
+        articleBriefTextHtml,
     } = props;
     return (
         <Card
@@ -65,7 +65,10 @@ export function ArticlePreviewCard(props: IProps) {
                 </div>
             }
             bordered={false}>
-            <div className={Style.brief}>{articleBriefText}……</div>
+            <div
+                className={Style.brief}
+                dangerouslySetInnerHTML={{__html: articleBriefTextHtml}}
+            />
             <ArticleLink articleId={articleId}>
                 <>继续阅读 {'>'}</>
             </ArticleLink>
