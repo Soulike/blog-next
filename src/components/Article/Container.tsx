@@ -16,7 +16,9 @@ export function Article() {
     const [category, setCategory] = useState(new Category(0, ''));
     const [loading, setLoading] = useState(true);
 
-    const markdownConverter = useMarkdownConverter();
+    const [articleContentHtml, setArticleContentHtml] = useState('');
+
+    const markdownConverterWrapper = useMarkdownConverter();
 
     const router = useRouter();
 
@@ -60,7 +62,18 @@ export function Article() {
         }
     }, [router]);
 
-    const {title, content, publicationTime, modificationTime} = article;
+    useEffect(() => {
+        setLoading(true);
+        markdownConverterWrapper
+            .then((markdownConverter) => {
+                setArticleContentHtml(
+                    markdownConverter.makeHtml(article.content),
+                );
+            })
+            .finally(() => setLoading(false));
+    }, [article.content, markdownConverterWrapper]);
+
+    const {title, publicationTime, modificationTime} = article;
     return (
         <>
             <Head>
@@ -68,7 +81,7 @@ export function Article() {
             </Head>
             <ArticleView
                 title={title}
-                contentHtml={markdownConverter.makeHtml(content)}
+                contentHtml={articleContentHtml}
                 publicationTime={publicationTime}
                 modificationTime={modificationTime}
                 loading={loading}

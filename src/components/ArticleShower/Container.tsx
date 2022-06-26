@@ -14,24 +14,28 @@ export function ArticleShower(props: IProps) {
     const [wrapper, setWrapper] = useState(document.createElement('div'));
     const [loading, setLoading] = useState(true);
     const {HTMLContent} = props;
-    const hljs = useHljs();
+    const hljsWrapper = useHljs();
 
     useEffect(() => {
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = HTMLContent;
+        const doHighlight = async () => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = HTMLContent;
+
+            const hljs = await hljsWrapper;
+            await Promise.all(
+                Array.from(wrapper.querySelectorAll('pre')).map(async (pre) => {
+                    pre.querySelectorAll('code').forEach((block) => {
+                        hljs.highlightElement(block);
+                    });
+                    await setImmediatePromise();
+                }),
+            );
+            setWrapper(wrapper);
+        };
 
         setLoading(true);
-        wrapper.querySelectorAll('pre').forEach(async (pre) => {
-            pre.querySelectorAll('code').forEach((block) => {
-                hljs.highlightElement(block);
-            });
-            await setImmediatePromise();
-        });
-
-        setWrapper(wrapper);
-
-        setLoading(false);
-    }, [HTMLContent, hljs]);
+        doHighlight().finally(() => setLoading(false));
+    }, [HTMLContent, hljsWrapper]);
 
     useMaxJax([HTMLContent]);
 

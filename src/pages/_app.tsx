@@ -12,8 +12,12 @@ import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
 import {HljsContext} from '@/src/contexts/HljsContext';
 import {MarkdownConverterContext} from '@/src/contexts/MarkdownConverterContext';
-import {hljs} from '@/src/utils/hljs';
-import {markdownConverter} from '@/src/utils/markdownConverter';
+
+const hljs = import('@/src/utils/hljs').then(({hljs}) => hljs);
+
+const markdownConverter = import('@/src/utils/markdownConverter').then(
+    ({markdownConverter}) => markdownConverter,
+);
 
 function MyApp({Component, pageProps}: AppProps) {
     return (

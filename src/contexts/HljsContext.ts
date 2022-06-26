@@ -1,5 +1,5 @@
 import React from 'react';
 
-import {hljs} from '@/src/utils/hljs';
+const hljs = import('@/src/utils/hljs').then(({hljs}) => hljs);
 
 export const HljsContext = React.createContext(hljs);
