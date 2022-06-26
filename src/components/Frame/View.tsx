@@ -11,6 +11,7 @@ import React from 'react';
 import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
 import avatar from '@/src/static/avatar.png';
 import {Category} from '@/src/types';
+import {getCategoryLink} from '@/src/utils/route';
 
 import Style from './Style.module.scss';
 
@@ -49,15 +50,10 @@ export function FrameView(props: Props) {
             key: 'categorySubmenu',
             children: categoryList.map((category) => {
                 const {id, name} = category;
-                const urlSearchParams = new URLSearchParams();
-                urlSearchParams.set('id', id.toString());
                 return {
                     label: (
                         <div>
-                            <Link
-                                href={`${
-                                    PAGE_ID_TO_ROUTE[PAGE_ID.CATEGORY]
-                                }?${urlSearchParams.toString()}`}>
+                            <Link href={getCategoryLink(id)}>
                                 <a>
                                     <TagOutlined className={Style.icon} />
                                     {name}
