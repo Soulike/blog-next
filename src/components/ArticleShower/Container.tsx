@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
+import {useHljs} from '@/src/hooks/useHljs';
 import {useMaxJax} from '@/src/hooks/useMaxJax';
-import {hljs} from '@/src/utils/hljs';
 import {setImmediatePromise} from '@/src/utils/promisify';
 
 import {ArticleShowerView} from './View';
@@ -14,6 +14,7 @@ export function ArticleShower(props: IProps) {
     const [wrapper, setWrapper] = useState(document.createElement('div'));
     const [loading, setLoading] = useState(true);
     const {HTMLContent} = props;
+    const hljs = useHljs();
 
     useEffect(() => {
         const wrapper = document.createElement('div');
@@ -30,7 +31,7 @@ export function ArticleShower(props: IProps) {
         setWrapper(wrapper);
 
         setLoading(false);
-    }, [HTMLContent]);
+    }, [HTMLContent, hljs]);
 
     useMaxJax([HTMLContent]);
 

@@ -3,6 +3,7 @@ import '@/src/moduleConfig/antd';
 
 import {ConfigProvider} from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
+import hljs from 'highlight.js';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -10,15 +11,18 @@ import {Suspense} from 'react';
 
 import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
+import {HljsContext} from '@/src/contexts/HljsContext';
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
         <>
             <Suspense fallback={<Loading />}>
                 <ConfigProvider locale={zhCN}>
-                    <Frame>
-                        <Component {...pageProps} />
-                    </Frame>
+                    <HljsContext.Provider value={hljs} >
+                        <Frame>
+                            <Component {...pageProps} />
+                        </Frame>
+                    </HljsContext.Provider>
                 </ConfigProvider>
             </Suspense>
             <Head>
