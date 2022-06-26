@@ -1,3 +1,4 @@
+import {message} from 'antd';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {useEffect, useState} from 'react';
@@ -23,12 +24,24 @@ export function Article() {
     const router = useRouter();
 
     useEffect(() => {
-        const getArticle = async (idNum: number) => {
-            return await ArticleApi.getById(idNum);
-        };
-
-        const getCategory = async (categoryId: number) => {
-            return await CategoryApi.getById(categoryId);
+        const processArticle = async (idNum: number) => {
+            const article = await ArticleApi.getById(idNum);
+            if (article === null) {
+                router.replace('/404');
+                return;
+            }
+            setArticle(article);
+            const {category: categoryId, content: contentMarkdown} = article;
+            const [category, markdownConverter] = await Promise.all([
+                CategoryApi.getById(categoryId),
+                markdownConverterWrapper,
+            ]);
+            if (category === null) {
+                // should be impossible
+                message.error('类别不存在');
+            }
+            setCategory(category!);
+            setArticleContentHtml(markdownConverter.makeHtml(contentMarkdown));
         };
 
         setLoading(true);
@@ -43,35 +56,11 @@ export function Article() {
                 if (Number.isNaN(idNum)) {
                     router.replace(PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]);
                 } else {
-                    getArticle(idNum)
-                        .then((article) => {
-                            if (article !== null) {
-                                setArticle(article);
-                                const {category: categoryId} = article;
-                                return getCategory(categoryId);
-                            }
-                        })
-                        .then((category) => {
-                            if (category !== null && category !== undefined) {
-                                setCategory(category);
-                            }
-                        })
-                        .finally(() => setLoading(false));
+                    processArticle(idNum).finally(() => setLoading(false));
                 }
             }
         }
-    }, [router]);
-
-    useEffect(() => {
-        setLoading(true);
-        markdownConverterWrapper
-            .then((markdownConverter) => {
-                setArticleContentHtml(
-                    markdownConverter.makeHtml(article.content),
-                );
-            })
-            .finally(() => setLoading(false));
-    }, [article.content, markdownConverterWrapper]);
+    }, [router, markdownConverterWrapper]);
 
     const {title, publicationTime, modificationTime} = article;
     return (
