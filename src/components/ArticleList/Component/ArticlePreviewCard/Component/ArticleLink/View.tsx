@@ -1,7 +1,7 @@
 import Link, {LinkProps} from 'next/link';
 import React from 'react';
 
-import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
+import {getArticleLink} from '@/src/utils/route';
 
 interface Props extends Omit<LinkProps, 'href' | 'target' | 'rel'> {
     articleId: number;
@@ -10,13 +10,9 @@ interface Props extends Omit<LinkProps, 'href' | 'target' | 'rel'> {
 
 export function ArticleLink(props: Props) {
     const {children, articleId, ...rest} = props;
-    const urlQueryParams = new URLSearchParams();
-    urlQueryParams.set('id', articleId.toString());
     return (
         <Link
-            href={`${
-                PAGE_ID_TO_ROUTE[PAGE_ID.ARTICLE]
-            }?${urlQueryParams.toString()}`}
+            href={getArticleLink(articleId)}
             {...rest}>
             <a target={'_blank'} rel='noopener norefferrer'>
                 {children}
