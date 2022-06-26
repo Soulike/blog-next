@@ -27,7 +27,7 @@ export function ArticlePreviewCard(props: IArticlePreviewCardProps) {
                 markdownConverter.makeHtml(articleBriefTextMarkdown),
             );
         });
-    });
+    }, [markdownConverterWrapper, articleBriefTextMarkdown]);
 
     return (
         <ArticlePreviewCardView
