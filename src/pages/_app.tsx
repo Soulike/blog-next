@@ -1,6 +1,8 @@
 import '@/src/globalStyle/globalStyle.scss';
 import '@/src/moduleConfig/antd';
 
+import {ConfigProvider} from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -12,7 +14,9 @@ function MyApp({Component, pageProps}: AppProps) {
     return (
         <>
             <Suspense fallback={<Loading />}>
-                <Component {...pageProps} />
+                <ConfigProvider locale={zhCN}>
+                    <Component {...pageProps} />
+                </ConfigProvider>
             </Suspense>
             <Head>
                 <meta
