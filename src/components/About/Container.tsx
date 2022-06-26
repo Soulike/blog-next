@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, {useEffect, useState} from 'react';
 
 import {Option} from '@/src/apis';
@@ -9,8 +10,7 @@ export function About() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getAbout = async () =>
-        {
+        const getAbout = async () => {
             const result = await Option.get();
             return result === null ? '' : result.about;
         };
@@ -23,5 +23,12 @@ export function About() {
             .finally(() => setLoading(false));
     }, []);
 
-    return <AboutView about={about} loading={loading} />;
+    return (
+        <>
+            <Head>
+                <title>关于 - Soulike 的博客</title>
+            </Head>
+            <AboutView about={about} loading={loading} />
+        </>
+    );
 }
