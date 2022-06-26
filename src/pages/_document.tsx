@@ -14,10 +14,10 @@ export default function Document() {
                     dangerouslySetInnerHTML={{
                         __html: `
 MathJax = {
-        'tex': {
-        'inlineMath': [['$', '$'], ['\\(', '\\)']],
-        'displayMath': [['$$', '$$'], ['\\[', '\\]']],
-        'processEnvironments': true,
+    'tex': {
+    'inlineMath': [['$', '$']],
+    'displayMath': [['$$', '$$']],
+    'processEnvironments': true,
     },
 };`,
                     }}
