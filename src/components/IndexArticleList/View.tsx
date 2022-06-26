@@ -1,15 +1,9 @@
-import dynamic from 'next/dynamic';
 import React from 'react';
 
 import {Article} from '@/src/types';
 
+import {ArticleList} from '../ArticleList';
 import Style from './Style.module.scss';
-
-const ArticleListPromise = import('@/src/components/ArticleList').then(
-    ({ArticleList}) => ArticleList,
-);
-
-const ArticleList = dynamic(() => ArticleListPromise, {ssr: false});
 
 interface Props {
     loading: boolean;
