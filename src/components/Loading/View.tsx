@@ -10,7 +10,7 @@ export function Loading() {
     return (
         <div className={Style.Loading}>
             <img
-                src={svg}
+                src={svg.src}
                 className={Style.icon}
                 alt={'icon'}
                 width={'300px'}
