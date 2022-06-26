@@ -17,7 +17,7 @@ export function ArticleLink(props: Props)
         <Link href={`${PAGE_ID_TO_ROUTE[PAGE_ID.ARTICLE]}?${urlQueryParams.toString()}`}
               target={'_blank'}
               rel="noopener norefferrer" {...rest}>
-            {children}
+            <a>{children}</a>
         </Link>
     );
 }
