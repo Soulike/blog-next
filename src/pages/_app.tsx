@@ -3,7 +3,6 @@ import '@/src/moduleConfig/antd';
 
 import {ConfigProvider} from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
-import hljs from 'highlight.js';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -13,6 +12,7 @@ import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
 import {HljsContext} from '@/src/contexts/HljsContext';
 import {MarkdownConverterContext} from '@/src/contexts/MarkdownConverterContext';
+import {hljs} from '@/src/utils/hljs';
 import {markdownConverter} from '@/src/utils/markdownConverter';
 
 function MyApp({Component, pageProps}: AppProps) {
