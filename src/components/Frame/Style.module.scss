@@ -1,6 +1,4 @@
 .Frame {
-    @import '@/src/globalStyle/COLOR.css';
-
     height: 100vh;
     width: 100vw;
 
@@ -27,14 +25,21 @@
 
         .headerInner {
             width: 100%;
+            height: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
 
-            .avatar {
+            .avatarWrapper {
                 width: 10%;
                 height: 100%;
-                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .avatar {
+                    border-radius: 100%;
+                }
             }
 
             .menu {
@@ -83,10 +88,13 @@
                 padding-right: 1vw;
             }
 
-            .avatar {
+            .avatarWrapper {
                 width: 75%;
                 height: 100%;
-                border-radius: 100%;
+                
+                .avatar {
+                    border-radius: 100%;
+                }
             }
 
             .menu {

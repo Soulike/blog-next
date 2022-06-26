@@ -2,12 +2,13 @@ import '@/src/globalStyle/globalStyle.scss';
 import '@/src/moduleConfig/antd';
 
 import {ConfigProvider} from 'antd';
-import zhCN from 'antd/es/locale/zh_CN';
+import zhCN from 'antd/lib/locale/zh_CN';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import {Suspense} from 'react';
 
+import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -15,7 +16,9 @@ function MyApp({Component, pageProps}: AppProps) {
         <>
             <Suspense fallback={<Loading />}>
                 <ConfigProvider locale={zhCN}>
-                    <Component {...pageProps} />
+                    <Frame>
+                        <Component {...pageProps} />
+                    </Frame>
                 </ConfigProvider>
             </Suspense>
             <Head>
@@ -34,20 +37,6 @@ function MyApp({Component, pageProps}: AppProps) {
                 />
                 <title>Soulike 的博客</title>
             </Head>
-            <Script id={'mathjax-config'}>
-                {`MathJax = {
-    'tex': {
-        'inlineMath': [['$', '$'], ['\\(', '\\)']],
-        'displayMath': [['$$', '$$'], ['\\[', '\\]']],
-        'processEnvironments': true,
-    },
-};`}
-            </Script>
-            <Script
-                id='mathjax-cdn'
-                src='https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js'
-            />
-
             <Script src='https://www.googletagmanager.com/gtag/js?id=UA-148185792-1' />
             <Script id={'google-analytics'}>
                 {`

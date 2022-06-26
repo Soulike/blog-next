@@ -1,4 +1,9 @@
-import {HomeOutlined, InfoOutlined, TagOutlined, TagsOutlined} from '@ant-design/icons';
+import {
+    HomeOutlined,
+    InfoOutlined,
+    TagOutlined,
+    TagsOutlined,
+} from '@ant-design/icons';
 import {Layout, Menu} from 'antd';
 import Img from 'next/image';
 import Link from 'next/link';
@@ -19,16 +24,17 @@ interface Props {
     children?: React.ReactNode;
 }
 
-export function FrameView(props: Props)
-{
+export function FrameView(props: Props) {
     const {hitokoto, year, categoryList, children} = props;
     const menuItems = [
         {
             label: (
                 <div className={Style.item}>
                     <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]}>
-                        <HomeOutlined className={Style.icon} />
-                        首页
+                        <a>
+                            <HomeOutlined className={Style.icon} />
+                            首页
+                        </a>
                     </Link>
                 </div>
             ),
@@ -53,8 +59,10 @@ export function FrameView(props: Props)
                                 href={`${
                                     PAGE_ID_TO_ROUTE[PAGE_ID.CATEGORY]
                                 }?${urlSearchParams.toString()}`}>
-                                <TagOutlined className={Style.icon} />
-                                {name}
+                                <a>
+                                    <TagOutlined className={Style.icon} />
+                                    {name}
+                                </a>
                             </Link>
                         </div>
                     ),
@@ -66,8 +74,10 @@ export function FrameView(props: Props)
             label: (
                 <div className={Style.item}>
                     <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT]}>
-                        <InfoOutlined className={Style.icon} />
-                        关于
+                        <a>
+                            <InfoOutlined className={Style.icon} />
+                            关于
+                        </a>
                     </Link>
                 </div>
             ),
@@ -80,8 +90,19 @@ export function FrameView(props: Props)
             {/*在宽 500px 以上屏幕显示的 Sider*/}
             <Sider theme={'light'} className={Style.sidebar}>
                 <div className={Style.sidebarInner}>
-                    <Img src={avatar} className={Style.avatar} alt={'avatar'} />
-                    <Menu className={Style.menu} mode={'inline'} selectable={false} items={menuItems} />
+                    <div className={Style.avatarWrapper}>
+                        <Img
+                            src={avatar}
+                            className={Style.avatar}
+                            alt={'avatar'}
+                        />
+                    </div>
+                    <Menu
+                        className={Style.menu}
+                        mode={'inline'}
+                        selectable={false}
+                        items={menuItems}
+                    />
                 </div>
             </Sider>
 
@@ -89,21 +110,30 @@ export function FrameView(props: Props)
                 {/*在宽 500 px 以下屏幕显示的 Header*/}
                 <Header className={Style.header}>
                     <div className={Style.headerInner}>
-                        <Img src={avatar} className={Style.avatar} alt={'avatar'} />
-                        <Menu className={Style.menu}
-                              mode={'horizontal'}
-                              selectable={false}
-                              theme={'dark'}
-                              items={menuItems} />
+                        <div className={Style.avatarWrapper}>
+                            <Img
+                                src={avatar}
+                                className={Style.avatar}
+                                alt={'avatar'}
+                            />
+                        </div>
+                        <Menu
+                            className={Style.menu}
+                            mode={'horizontal'}
+                            selectable={false}
+                            theme={'dark'}
+                            items={menuItems}
+                        />
                     </div>
                 </Header>
-                <Content className={Style.content}>
-                    {children}
-                </Content>
+                <Content className={Style.content}>{children}</Content>
                 <Footer className={Style.footer}>
-                    <div className={Style.info}>{year} - Designed & Created by Soulike</div>
+                    <div className={Style.info}>
+                        {year} - Designed & Created by Soulike
+                    </div>
                     <div className={Style.hitokoto}>{hitokoto}</div>
                 </Footer>
             </Layout>
-        </Layout>);
+        </Layout>
+    );
 }
