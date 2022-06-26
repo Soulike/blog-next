@@ -1,7 +1,7 @@
 import '@/src/globalStyle/globalStyle.scss';
 import '@/src/moduleConfig/antd';
 
-import {ConfigProvider} from 'antd';
+import ConfigProvider from 'antd/lib/config-provider';
 import zhCN from 'antd/lib/locale/zh_CN';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
