@@ -8,7 +8,7 @@ import {Article} from '@/src/types';
 
 export function Category() {
     const [articleList, setArticleList] = useState([] as Article[]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const router = useRouter();
 

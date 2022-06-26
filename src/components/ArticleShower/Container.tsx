@@ -12,7 +12,7 @@ interface IProps {
 
 export function ArticleShower(props: IProps) {
     const [wrapper, setWrapper] = useState(document.createElement('div'));
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const {HTMLContent} = props;
 
     useEffect(() => {

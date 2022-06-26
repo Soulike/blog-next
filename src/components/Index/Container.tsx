@@ -7,7 +7,7 @@ import {Article} from '@/src/types';
 
 export function Index() {
     const [articleList, setArticleList] = useState([] as Article[]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setLoading(true);

@@ -6,7 +6,7 @@ import {AboutView} from './View';
 
 export function About() {
     const [about, setAbout] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getAbout = async () =>
