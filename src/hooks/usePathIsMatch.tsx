@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router';
 import {useEffect, useState} from 'react';
 
-export function useUnmatchedPathRedirect() {
+export function usePathIsMatch() {
     const [isMatch, setIsMatch] = useState(false);
 
     const router = useRouter();
