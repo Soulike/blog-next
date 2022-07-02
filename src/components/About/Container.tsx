@@ -1,26 +1,13 @@
 import Head from 'next/head';
-import {useEffect, useState} from 'react';
 
-import {Option} from '@/src/apis';
+import {useAbout} from '@/src/hooks/useAbout';
 import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 
 import {AboutView} from './View';
 
 export function About() {
-    const [about, setAbout] = useState<string | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    // TODO: useAbout()
-    useEffect(() => {
-        setLoading(true);
-        Option.get()
-            .then((result) => {
-                if (result !== null) {
-                    setAbout(result.about);
-                }
-            })
-            .finally(() => setLoading(false));
-    }, []);
+    
+    const {loading: aboutIsLoading, about} = useAbout();
 
     const {loading: converterIsLoading, html} = useMarkdownConverter(
         about ?? undefined,
@@ -33,7 +20,7 @@ export function About() {
             </Head>
             <AboutView
                 aboutHtml={html ?? ''}
-                loading={loading || converterIsLoading}
+                loading={aboutIsLoading || converterIsLoading}
             />
         </>
     );
