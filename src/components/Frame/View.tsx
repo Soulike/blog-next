@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import {Layout, Menu} from 'antd';
 import Link from 'next/link';
-import React from 'react';
+import React, {useMemo} from 'react';
 
 import {Loading} from '@/src/components/Loading';
 import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
@@ -28,7 +28,7 @@ interface Props {
 
 export function FrameView(props: Props) {
     const {hitokoto, year, categories, children, loading} = props;
-    const menuItems = [
+    const menuItems = useMemo(() => [
         {
             label: (
                 <div className={Style.item}>
@@ -80,7 +80,7 @@ export function FrameView(props: Props) {
             ),
             key: PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT],
         },
-    ];
+    ], [categories]);
 
     return (
         <Layout className={Style.Frame}>
