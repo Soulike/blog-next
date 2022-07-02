@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 
-import {Category as CategoryApi} from '@/src/apis';
-import {Category} from '@/src/types';
+import {useCategories} from '@/src/hooks/useCategories';
 
 import {FrameView} from './View';
 
@@ -14,7 +13,6 @@ export function Frame(props: IFrameProps) {
     const {children} = props;
     const [hitokoto, setHitokoto] = useState('这里应该有一句话');
     const [year, setYear] = useState(1970);
-    const [categoryList, setCategoryList] = useState([] as Category[]);
 
     // 设定当前年份
     useEffect(() => {
@@ -40,18 +38,14 @@ export function Frame(props: IFrameProps) {
     }, []);
 
     // 获取所有分类
-    useEffect(() => {
-        const getCategoryList = async () => await CategoryApi.getAll();
-
-        getCategoryList().then((categoryList) => {
-            if (categoryList !== null) {
-                setCategoryList(categoryList);
-            }
-        });
-    }, []);
+    const {loading: categoriesIsLoading, categories} = useCategories();
 
     return (
-        <FrameView hitokoto={hitokoto} year={year} categoryList={categoryList}>
+        <FrameView
+            loading={categoriesIsLoading}
+            hitokoto={hitokoto}
+            year={year}
+            categories={categories ?? []}>
             {children}
         </FrameView>
     );

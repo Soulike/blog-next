@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 
-import {Category as CategoryApi} from '@/src/apis';
+import {useCategories} from '@/src/hooks/useCategories';
 import {useMaxJax} from '@/src/hooks/useMaxJax';
 import {Article, Category} from '@/src/types';
 
@@ -12,42 +12,38 @@ interface IProps {
 }
 
 export function ArticleList(props: IProps) {
-    const [categoryMap, setCategoryMap] = useState(new Map<number, Category>());
-    const [selfLoading, setSelfLoading] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
+    const {categories, loading: categoriesIsLoading} = useCategories();
 
     const {articleList, loading} = props;
-
-    const onPageNumberChange = (pageNumber: number) =>
-        setPageNumber(pageNumber);
-
-    useEffect(() => {
-        const getCategoryMap = async () => {
-            const categoryList = await CategoryApi.getAll();
-            const categoryMap = new Map<number, Category>();
-            if (categoryList !== null) {
-                categoryList.forEach((category) => {
-                    categoryMap.set(category.id, category);
-                });
+    const categoryMap: Map<number, Category> = useMemo(() => {
+        const map = new Map();
+        if (categories !== null) {
+            for (const category of categories) {
+                map.set(category.id, category);
             }
-            return categoryMap;
-        };
+        }
+        return map;
+    }, [categories]);
 
-        setSelfLoading(true);
-        getCategoryMap().then((categoryMap) => {
-            setCategoryMap(categoryMap);
-            setSelfLoading(false);
-        });
-    }, []);
+    const onPageNumberChange = useCallback(
+        (pageNumber: number) => setPageNumber(pageNumber),
+        [],
+    );
 
     useMaxJax([pageNumber]);
+
+    const isLoading = useMemo(
+        () => loading || categoriesIsLoading,
+        [categoriesIsLoading, loading],
+    );
 
     return (
         <ArticleListView
             onPageNumberChange={onPageNumberChange}
             articleList={articleList}
             categoryMap={categoryMap}
-            loading={loading || selfLoading}
+            loading={isLoading}
         />
     );
 }
