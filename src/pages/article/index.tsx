@@ -1,8 +1,8 @@
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
 
-import {PAGE_ID, PAGE_ID_TO_ROUTE} from '../../config/route';
-import {getArticleLink} from '../../utils/route';
+import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
+import {getArticleLink} from '@/src/utils/route';
 
 /**
  * For backward compatibility. Redirect article?id=xxx to article/xxx
