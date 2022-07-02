@@ -1,43 +1,27 @@
 import {useRouter} from 'next/router';
-import React, {useEffect, useState} from 'react';
+import React, {useMemo} from 'react';
 
-import {Article as ArticleApi} from '@/src/apis';
 import {IndexArticleList} from '@/src/components/IndexArticleList';
-import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
-import {Article} from '@/src/types';
+import {useArticlesWithAbstract} from '@/src/hooks/useArticlesWithAbstract';
 
 export function Category() {
-    const [articleList, setArticleList] = useState([] as Article[]);
-    const [loading, setLoading] = useState(true);
-
     const router = useRouter();
 
-    useEffect(() => {
-        const getArticleList = async (categoryId: number) =>
-            await ArticleApi.getByCategoryWithAbstract(categoryId);
-
-        setLoading(true);
+    const categoryId = useMemo(() => {
         if (router.isReady) {
-            const idString = router.query.id;
-            let id = NaN;
-            if (typeof idString === 'string') {
-                id = Number.parseInt(idString);
+            const {id} = router.query;
+            if (typeof id === 'string') {
+                return Number.parseInt(id);
             }
-
-            if (Number.isNaN(id)) {
-                router.replace(PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]);
-                return;
-            }
-
-            getArticleList(id)
-                .then((articleList) => {
-                    if (articleList) {
-                        setArticleList(articleList);
-                    }
-                })
-                .finally(() => setLoading(false));
         }
-    }, [router]);
+    }, [router.isReady, router.query]);
 
-    return <IndexArticleList articleList={articleList} loading={loading} />;
+    const {loading, articlesWithAbstract} = useArticlesWithAbstract(categoryId);
+
+    return (
+        <IndexArticleList
+            articleList={articlesWithAbstract ?? []}
+            loading={loading}
+        />
+    );
 }
