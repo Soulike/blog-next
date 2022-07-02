@@ -1,12 +1,9 @@
-import {useContext, useEffect, useState} from 'react';
-
-import {MarkdownConverterContext} from '@/src/contexts/MarkdownConverterContext';
+import {useEffect, useState} from 'react';
 
 export function useMarkdownConverter(markdown: string | undefined): {
     loading: boolean;
     html: string | null;
 } {
-    const converterWrapper = useContext(MarkdownConverterContext);
     const [loading, setLoading] = useState(true);
     const [html, setHtml] = useState<string | null>(null);
 
@@ -16,13 +13,13 @@ export function useMarkdownConverter(markdown: string | undefined): {
         if (markdown === undefined) {
             return;
         }
-        converterWrapper
-            .then((converter) => {
-                const html = converter.makeHtml(markdown);
+        import('@/src/utils/markdownConverter')
+            .then(({markdownConverter}) => {
+                const html = markdownConverter.makeHtml(markdown);
                 setHtml(html);
             })
             .finally(() => setLoading(false));
-    }, [converterWrapper, markdown]);
+    }, [markdown]);
 
     return {loading, html};
 }

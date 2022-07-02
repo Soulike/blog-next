@@ -13,23 +13,15 @@ import {Suspense} from 'react';
 
 import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
-import {MarkdownConverterContext} from '@/src/contexts/MarkdownConverterContext';
-
-const markdownConverter = import('@/src/utils/markdownConverter').then(
-    ({markdownConverter}) => markdownConverter,
-);
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
         <>
             <Suspense fallback={<Loading />}>
                 <ConfigProvider locale={zhCN}>
-                    <MarkdownConverterContext.Provider
-                        value={markdownConverter}>
-                        <Frame>
-                            <Component {...pageProps} />
-                        </Frame>
-                    </MarkdownConverterContext.Provider>
+                    <Frame>
+                        <Component {...pageProps} />
+                    </Frame>
                 </ConfigProvider>
             </Suspense>
             <Head>
