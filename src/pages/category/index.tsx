@@ -1,8 +1,8 @@
 import {useRouter} from 'next/router';
 import {useEffect} from 'react';
 
-import {PAGE_ID, PAGE_ID_TO_ROUTE} from '../config/route';
-import {getCategoryLink} from '../utils/route';
+import {PAGE_ID, PAGE_ID_TO_ROUTE} from '../../config/route';
+import {getCategoryLink} from '../../utils/route';
 
 /**
  * For backward compatibility. Redirect category?id=xxx to category/xxx
