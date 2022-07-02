@@ -8,12 +8,12 @@ import {Layout, Menu} from 'antd';
 import Link from 'next/link';
 import React from 'react';
 
+import {Loading} from '@/src/components/Loading';
 import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
 import avatar from '@/src/static/avatar.png';
 import {Category} from '@/src/types';
 import {getCategoryLink} from '@/src/utils/route';
 
-import {Loading} from '../Loading';
 import Style from './Style.module.scss';
 
 const {Sider, Footer, Content, Header} = Layout;
