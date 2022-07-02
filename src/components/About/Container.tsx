@@ -7,24 +7,24 @@ import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 import {AboutView} from './View';
 
 export function About() {
-    const [aboutHtml, setAboutHtml] = useState('');
+    const [about, setAbout] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const markdownConverterWrapper = useMarkdownConverter();
-
+    // TODO: useAbout()
     useEffect(() => {
-        const getAbout = async () => {
-            const result = await Option.get();
-            return result === null ? '' : result.about;
-        };
-
         setLoading(true);
-        Promise.all([markdownConverterWrapper, getAbout()])
-            .then(([markdownConverter, aboutMarkdown]) => {
-                setAboutHtml(markdownConverter.makeHtml(aboutMarkdown));
+        Option.get()
+            .then((result) => {
+                if (result !== null) {
+                    setAbout(result.about);
+                }
             })
             .finally(() => setLoading(false));
-    }, [markdownConverterWrapper]);
+    }, []);
+
+    const {loading: converterIsLoading, html} = useMarkdownConverter(
+        about ?? undefined,
+    );
 
     return (
         <>
@@ -32,8 +32,8 @@ export function About() {
                 <title>关于 - Soulike 的博客</title>
             </Head>
             <AboutView
-                aboutHtml={aboutHtml}
-                loading={loading}
+                aboutHtml={html ?? ''}
+                loading={loading || converterIsLoading}
             />
         </>
     );

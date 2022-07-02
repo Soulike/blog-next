@@ -1,5 +1,3 @@
-import {useEffect, useState} from 'react';
-
 import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 import {Category} from '@/src/types';
 
@@ -17,21 +15,14 @@ export interface IArticlePreviewCardProps {
 export function ArticlePreviewCard(props: IArticlePreviewCardProps) {
     const {articleBriefTextMarkdown, ...restProps} = props;
 
-    const [articleBriefTextHtml, setArticleBriefTextHtml] = useState('');
-
-    const markdownConverterWrapper = useMarkdownConverter();
-
-    useEffect(() => {
-        markdownConverterWrapper.then((markdownConverter) => {
-            setArticleBriefTextHtml(
-                markdownConverter.makeHtml(articleBriefTextMarkdown),
-            );
-        });
-    }, [markdownConverterWrapper, articleBriefTextMarkdown]);
+    const {loading, html: articleBriefTextHtml} = useMarkdownConverter(
+        articleBriefTextMarkdown,
+    );
 
     return (
         <ArticlePreviewCardView
-            articleBriefTextHtml={articleBriefTextHtml}
+            loading={loading}
+            articleBriefTextHtml={articleBriefTextHtml ?? ''}
             {...restProps}
         />
     );

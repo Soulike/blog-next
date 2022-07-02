@@ -1,68 +1,53 @@
-import {message} from 'antd';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo} from 'react';
 
-import {Article as ArticleApi, Category as CategoryApi} from '@/src/apis';
-import {PAGE_ID, PAGE_ID_TO_ROUTE} from '@/src/config/route';
+import {useArticle} from '@/src/hooks/useArticle';
+import {useCategory} from '@/src/hooks/useCategory';
 import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 import {Article as ArticleClass, Category} from '@/src/types';
 
 import {ArticleView} from './View';
 
 export function Article() {
-    const [article, setArticle] = useState(
-        new ArticleClass(0, '', '', 0, '', '', 0, true),
-    );
-    const [category, setCategory] = useState(new Category(0, ''));
-    const [loading, setLoading] = useState(true);
-
-    const [articleContentHtml, setArticleContentHtml] = useState('');
-
-    const markdownConverterWrapper = useMarkdownConverter();
-
     const router = useRouter();
+    const emptyArticle = useMemo(
+        () => new ArticleClass(0, '', '', 0, '', '', 0, true),
+        [],
+    );
+    const emptyCategory = useMemo(() => new Category(0, ''), []);
 
-    useEffect(() => {
-        const processArticle = async (idNum: number) => {
-            const article = await ArticleApi.getById(idNum);
-            if (article === null) {
-                router.replace('/404');
-                return;
-            }
-            setArticle(article);
-            const {category: categoryId, content: contentMarkdown} = article;
-            const [category, markdownConverter] = await Promise.all([
-                CategoryApi.getById(categoryId),
-                markdownConverterWrapper,
-            ]);
-            if (category === null) {
-                // should be impossible
-                message.error('类别不存在');
-            }
-            setCategory(category!);
-            setArticleContentHtml(markdownConverter.makeHtml(contentMarkdown));
-        };
-
-        setLoading(true);
+    const articleId = useMemo(() => {
         if (router.isReady) {
-            // 兼容性代码，第一版博客设置查询字符串为 articleId，第二版修改为 id
-            const id = router.query.id ?? router.query.articleId;
-
-            if (typeof id !== 'string') {
-                router.replace(PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]);
-            } else {
-                const idNum = Number.parseInt(id);
-                if (Number.isNaN(idNum)) {
-                    router.replace(PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]);
-                } else {
-                    processArticle(idNum).finally(() => setLoading(false));
-                }
+            const {id} = router.query;
+            if (typeof id === 'string') {
+                return Number.parseInt(id);
             }
         }
-    }, [router, markdownConverterWrapper]);
+    }, [router.isReady, router.query]);
 
-    const {title, publicationTime, modificationTime} = article;
+    const {loading: articleIsLoading, article} = useArticle(articleId);
+
+    useEffect(() => {
+        if (!articleIsLoading && article === null) {
+            router.replace('/404');
+        }
+    }, [article, articleIsLoading, router]);
+
+    const {loading: htmlIsLoading, html: articleContentHtml} =
+        useMarkdownConverter(article?.content);
+    const {loading: categoryIsLoading, category} = useCategory(
+        article?.category,
+    );
+
+    const loading = useMemo(
+        () => articleIsLoading || categoryIsLoading || htmlIsLoading,
+        [articleIsLoading, categoryIsLoading, htmlIsLoading],
+    );
+    const {title, publicationTime, modificationTime} = useMemo(
+        () => article ?? emptyArticle,
+        [article, emptyArticle],
+    );
     return (
         <>
             <Head>
@@ -70,11 +55,11 @@ export function Article() {
             </Head>
             <ArticleView
                 title={title}
-                contentHtml={articleContentHtml}
+                contentHtml={articleContentHtml ?? ''}
                 publicationTime={publicationTime}
                 modificationTime={modificationTime}
                 loading={loading}
-                category={category}
+                category={category ?? emptyCategory}
             />
         </>
     );

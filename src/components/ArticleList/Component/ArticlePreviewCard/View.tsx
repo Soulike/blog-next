@@ -1,9 +1,8 @@
-import
-    {
-        ClockCircleOutlined,
-        EyeOutlined,
-        TagsOutlined
-    } from '@ant-design/icons';
+import {
+    ClockCircleOutlined,
+    EyeOutlined,
+    TagsOutlined,
+} from '@ant-design/icons';
 import {Card, Tag} from 'antd';
 
 import {Category} from '@/src/types';
@@ -12,6 +11,7 @@ import {ArticleLink} from './Component/ArticleLink';
 import Style from './Style.module.scss';
 
 interface IProps {
+    loading: boolean;
     articleId: number;
     articleTitle: string;
     articleTime: Readonly<Date>;
@@ -22,6 +22,7 @@ interface IProps {
 
 export function ArticlePreviewCardView(props: IProps) {
     const {
+        loading,
         articleId,
         articleTitle,
         articleTime,
@@ -31,6 +32,7 @@ export function ArticlePreviewCardView(props: IProps) {
     } = props;
     return (
         <Card
+            loading={loading}
             className={Style.ArticlePreviewCard}
             title={
                 <div className={Style.header}>
