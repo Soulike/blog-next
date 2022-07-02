@@ -1,31 +1,21 @@
 import Head from 'next/head';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
-import {Article as ArticleApi} from '@/src/apis';
 import {IndexArticleList} from '@/src/components/IndexArticleList';
-import {Article} from '@/src/types';
+import {useArticlesWithAbstract} from '@/src/hooks/useArticlesWithAbstract';
 
 export function Index() {
-    const [articleList, setArticleList] = useState([] as Article[]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setLoading(true);
-        ArticleApi.getAllWithAbstract()
-            .then((articleList) => {
-                if (articleList) {
-                    setArticleList(articleList);
-                }
-            })
-            .finally(() => setLoading(false));
-    }, []);
+    const {loading, articlesWithAbstract} = useArticlesWithAbstract();
 
     return (
         <>
             <Head>
                 <title>Soulike 的博客</title>
             </Head>
-            <IndexArticleList articleList={articleList} loading={loading} />
+            <IndexArticleList
+                articleList={articlesWithAbstract ?? []}
+                loading={loading}
+            />
         </>
     );
 }
