@@ -13,28 +13,15 @@ import {Suspense} from 'react';
 
 import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
-import {HljsContext} from '@/src/contexts/HljsContext';
-import {MarkdownConverterContext} from '@/src/contexts/MarkdownConverterContext';
-
-const hljs = import('@/src/utils/hljs').then(({hljs}) => hljs);
-
-const markdownConverter = import('@/src/utils/markdownConverter').then(
-    ({markdownConverter}) => markdownConverter,
-);
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
         <>
             <Suspense fallback={<Loading />}>
                 <ConfigProvider locale={zhCN}>
-                    <HljsContext.Provider value={hljs}>
-                        <MarkdownConverterContext.Provider
-                            value={markdownConverter}>
-                            <Frame>
-                                <Component {...pageProps} />
-                            </Frame>
-                        </MarkdownConverterContext.Provider>
-                    </HljsContext.Provider>
+                    <Frame>
+                        <Component {...pageProps} />
+                    </Frame>
                 </ConfigProvider>
             </Suspense>
             <Head>
