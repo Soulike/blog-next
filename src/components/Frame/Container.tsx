@@ -24,7 +24,10 @@ export function Frame(props: IFrameProps) {
     // 获取所有分类
     const {loading: categoriesIsLoading, categories} = useCategories();
 
-    const loading = useMemo(() => categoriesIsLoading || !router.isReady, [categoriesIsLoading, router.isReady])
+    const loading = useMemo(
+        () => categoriesIsLoading || !router.isReady,
+        [categoriesIsLoading, router.isReady],
+    );
 
     return (
         <FrameView

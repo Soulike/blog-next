@@ -3,9 +3,7 @@ import {useEffect, useState} from 'react';
 import {Article as ArticleApi} from '@/src/apis';
 import {Article} from '@/src/types';
 
-export function useArticlesWithAbstract(
-    categoryId?: number,
-): {
+export function useArticlesWithAbstract(categoryId?: number): {
     loading: boolean;
     articlesWithAbstract: Article[] | null;
 } {
@@ -18,8 +16,7 @@ export function useArticlesWithAbstract(
         setLoading(true);
         setArticlesWithAbstract(null);
 
-        if (categoryId !== undefined && isNaN(categoryId))
-        {
+        if (categoryId !== undefined && isNaN(categoryId)) {
             setLoading(false);
             return;
         }

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-import { Option } from '@/src/apis';
+import {Option} from '@/src/apis';
 
 export function useAbout(): {loading: boolean; about: string | null} {
     const [about, setAbout] = useState<string | null>(null);

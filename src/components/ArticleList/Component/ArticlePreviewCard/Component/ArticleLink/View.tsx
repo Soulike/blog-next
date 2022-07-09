@@ -11,9 +11,7 @@ interface Props extends Omit<LinkProps, 'href' | 'target' | 'rel'> {
 export function ArticleLink(props: Props) {
     const {children, articleId, ...rest} = props;
     return (
-        <Link
-            href={getArticleLink(articleId)}
-            {...rest}>
+        <Link href={getArticleLink(articleId)} {...rest}>
             <a target={'_blank'} rel='noopener norefferrer'>
                 {children}
             </a>

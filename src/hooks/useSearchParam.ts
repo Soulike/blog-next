@@ -13,19 +13,22 @@ export function useSearchParam(paramName: string): [string | null, SetterType] {
             ? null
             : rawValue[0];
 
-    const setValue: SetterType = useCallback((value) => {
-        const query: typeof router.query = {...router.query};
-        if (value !== null) {
-            query[paramName] = value;
-        } else {
-            delete query[paramName];
-        }
+    const setValue: SetterType = useCallback(
+        (value) => {
+            const query: typeof router.query = {...router.query};
+            if (value !== null) {
+                query[paramName] = value;
+            } else {
+                delete query[paramName];
+            }
 
-        router.push({
-            pathname: router.pathname,
-            query
-        });
-    }, [paramName, router]);
+            router.push({
+                pathname: router.pathname,
+                query,
+            });
+        },
+        [paramName, router],
+    );
 
     return [value, setValue];
 }

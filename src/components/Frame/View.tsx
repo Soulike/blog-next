@@ -28,59 +28,62 @@ interface Props {
 
 export function FrameView(props: Props) {
     const {hitokoto, year, categories, children, loading} = props;
-    const menuItems = useMemo(() => [
-        {
-            label: (
-                <div className={Style.item}>
-                    <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]}>
-                        <a>
-                            <HomeOutlined className={Style.icon} />
-                            首页
-                        </a>
-                    </Link>
-                </div>
-            ),
-            key: PAGE_ID_TO_ROUTE[PAGE_ID.INDEX],
-        },
-        {
-            label: (
-                <>
-                    <TagsOutlined className={Style.icon} />
-                    分类
-                </>
-            ),
-            key: 'categorySubmenu',
-            children: categories.map((category) => {
-                const {id, name} = category;
-                return {
-                    label: (
-                        <div>
-                            <Link href={getCategoryLink(id)}>
-                                <a>
-                                    <TagOutlined className={Style.icon} />
-                                    {name}
-                                </a>
-                            </Link>
-                        </div>
-                    ),
-                    key: id,
-                };
-            }),
-        },
-        {
-            label: (
-                <div className={Style.item}>
-                    <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT]}>
-                        <a>
-                            <InfoOutlined className={Style.icon} />
-                            关于
-                        </a>
-                    </Link>
-                </div>
-            ),
-            key: PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT],
-        },
-    ], [categories]);
+    const menuItems = useMemo(
+        () => [
+            {
+                label: (
+                    <div className={Style.item}>
+                        <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]}>
+                            <a>
+                                <HomeOutlined className={Style.icon} />
+                                首页
+                            </a>
+                        </Link>
+                    </div>
+                ),
+                key: PAGE_ID_TO_ROUTE[PAGE_ID.INDEX],
+            },
+            {
+                label: (
+                    <>
+                        <TagsOutlined className={Style.icon} />
+                        分类
+                    </>
+                ),
+                key: 'categorySubmenu',
+                children: categories.map((category) => {
+                    const {id, name} = category;
+                    return {
+                        label: (
+                            <div>
+                                <Link href={getCategoryLink(id)}>
+                                    <a>
+                                        <TagOutlined className={Style.icon} />
+                                        {name}
+                                    </a>
+                                </Link>
+                            </div>
+                        ),
+                        key: id,
+                    };
+                }),
+            },
+            {
+                label: (
+                    <div className={Style.item}>
+                        <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT]}>
+                            <a>
+                                <InfoOutlined className={Style.icon} />
+                                关于
+                            </a>
+                        </Link>
+                    </div>
+                ),
+                key: PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT],
+            },
+        ],
+        [categories],
+    );
 
     return (
         <Layout className={Style.Frame}>

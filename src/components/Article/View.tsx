@@ -71,9 +71,7 @@ export function ArticleView(props: Props) {
                         )} 天前，可能已不具有时效性，请谨慎阅读`}
                     />
                 ) : null}
-                <ArticleShower
-                    HTMLContent={contentHtml}
-                />
+                <ArticleShower HTMLContent={contentHtml} />
             </Skeleton>
         </div>
     );

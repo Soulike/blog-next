@@ -13,17 +13,13 @@ export function useArticle(id: number): {
     useEffect(() => {
         setArticle(null);
         setLoading(true);
-        if (!isNaN(id))
-        {
+        if (!isNaN(id)) {
             ArticleApi.getById(id)
                 .then((article) => setArticle(article))
                 .finally(() => setLoading(false));
-        }
-        else
-        {
+        } else {
             setLoading(false);
         }
-        
     }, [id]);
 
     return {loading, article};

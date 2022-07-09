@@ -6,7 +6,6 @@ import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
 import {AboutView} from './View';
 
 export function About() {
-    
     const {loading: aboutIsLoading, about} = useAbout();
 
     const {loading: converterIsLoading, html} = useMarkdownConverter(

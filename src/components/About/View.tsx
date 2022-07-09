@@ -4,14 +4,12 @@ import {ArticleShower} from '@/src/components/ArticleShower';
 
 import Style from './Style.module.scss';
 
-interface Props
-{
-    loading: boolean,
-    aboutHtml: string,
+interface Props {
+    loading: boolean;
+    aboutHtml: string;
 }
 
-export function AboutView(props: Props)
-{
+export function AboutView(props: Props) {
     const {loading, aboutHtml} = props;
     return (
         <div className={Style.About}>
