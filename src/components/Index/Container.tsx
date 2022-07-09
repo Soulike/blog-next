@@ -5,7 +5,7 @@ import {IndexArticleList} from '@/src/components/IndexArticleList';
 import {useArticlesWithAbstract} from '@/src/hooks/useArticlesWithAbstract';
 
 export function Index() {
-    const {loading, articlesWithAbstract} = useArticlesWithAbstract(null);
+    const {loading, articlesWithAbstract} = useArticlesWithAbstract();
 
     return (
         <>

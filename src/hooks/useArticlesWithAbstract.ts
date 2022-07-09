@@ -4,7 +4,7 @@ import {Article as ArticleApi} from '@/src/apis';
 import {Article} from '@/src/types';
 
 export function useArticlesWithAbstract(
-    categoryId: number | null | undefined,
+    categoryId?: number,
 ): {
     loading: boolean;
     articlesWithAbstract: Article[] | null;
@@ -17,12 +17,15 @@ export function useArticlesWithAbstract(
     useEffect(() => {
         setLoading(true);
         setArticlesWithAbstract(null);
-        if (categoryId === undefined) {
+
+        if (categoryId !== undefined && isNaN(categoryId))
+        {
+            setLoading(false);
             return;
         }
 
         const promise =
-            categoryId === null
+            categoryId === undefined
                 ? ArticleApi.getAllWithAbstract()
                 : ArticleApi.getByCategoryWithAbstract(categoryId);
 
