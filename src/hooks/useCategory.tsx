@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Category as CategoryApi} from '@/src/apis';
 import {Category} from '@/src/types';
 
-export function useCategory(id: number | undefined): {
+export function useCategory(id: number): {
     loading: boolean;
     category: Category | null;
 } {
@@ -13,12 +13,13 @@ export function useCategory(id: number | undefined): {
     useEffect(() => {
         setCategory(null);
         setLoading(true);
-        if (typeof id !== 'number') {
-            return;
+        if (!isNaN(id)) {
+            CategoryApi.getById(id)
+                .then((category) => setCategory(category))
+                .finally(() => setLoading(false));
+        } else {
+            setLoading(false);
         }
-        CategoryApi.getById(id)
-            .then((category) => setCategory(category))
-            .finally(() => setLoading(false));
     }, [id]);
 
     return {loading, category};

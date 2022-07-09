@@ -32,7 +32,7 @@ export function Article() {
     const {loading: htmlIsLoading, html: articleContentHtml} =
         useMarkdownConverter(article?.content);
     const {loading: categoryIsLoading, category} = useCategory(
-        article?.category,
+        article?.category ?? NaN,
     );
 
     const loading = useMemo(
