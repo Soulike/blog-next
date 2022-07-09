@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {Article as ArticleApi} from '@/src/apis';
 import {Article} from '@/src/types';
 
-export function useArticle(id: number | undefined): {
+export function useArticle(id: number): {
     loading: boolean;
     article: Article | null;
 } {
@@ -13,12 +13,17 @@ export function useArticle(id: number | undefined): {
     useEffect(() => {
         setArticle(null);
         setLoading(true);
-        if (typeof id !== 'number') {
-            return;
+        if (!isNaN(id))
+        {
+            ArticleApi.getById(id)
+                .then((article) => setArticle(article))
+                .finally(() => setLoading(false));
         }
-        ArticleApi.getById(id)
-            .then((article) => setArticle(article))
-            .finally(() => setLoading(false));
+        else
+        {
+            setLoading(false);
+        }
+        
     }, [id]);
 
     return {loading, article};
