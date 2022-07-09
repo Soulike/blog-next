@@ -1,4 +1,5 @@
-import React from 'react';
+import {useRouter} from 'next/router';
+import React, {useMemo} from 'react';
 
 import {useCategories} from '@/src/hooks/useCategories';
 import {useCurrentYear} from '@/src/hooks/useCurrentYear';
@@ -12,6 +13,7 @@ export interface IFrameProps {
 
 export function Frame(props: IFrameProps) {
     const {children} = props;
+    const router = useRouter();
 
     // 设定当前年份
     const year = useCurrentYear();
@@ -22,9 +24,11 @@ export function Frame(props: IFrameProps) {
     // 获取所有分类
     const {loading: categoriesIsLoading, categories} = useCategories();
 
+    const loading = useMemo(() => categoriesIsLoading || !router.isReady, [categoriesIsLoading, router.isReady])
+
     return (
         <FrameView
-            loading={categoriesIsLoading}
+            loading={loading}
             hitokoto={hitokoto}
             year={year}
             categories={categories ?? []}>
