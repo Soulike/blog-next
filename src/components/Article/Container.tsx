@@ -5,6 +5,7 @@ import {useEffect, useMemo} from 'react';
 import {useArticle} from '@/src/hooks/useArticle';
 import {useCategory} from '@/src/hooks/useCategory';
 import {useMarkdownConverter} from '@/src/hooks/useMarkdownConverter';
+import {useSearchParam} from '@/src/hooks/useSearchParam';
 import {Article as ArticleClass, Category} from '@/src/types';
 
 import {ArticleView} from './View';
@@ -17,14 +18,8 @@ export function Article() {
     );
     const emptyCategory = useMemo(() => new Category(0, ''), []);
 
-    const articleId = useMemo(() => {
-        if (router.isReady) {
-            const {id} = router.query;
-            if (typeof id === 'string') {
-                return Number.parseInt(id);
-            }
-        }
-    }, [router.isReady, router.query]);
+    const [id] = useSearchParam('id');
+    const articleId = Number.parseInt(id!);
 
     const {loading: articleIsLoading, article} = useArticle(articleId);
 
