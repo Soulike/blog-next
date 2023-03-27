@@ -34,10 +34,8 @@ export function FrameView(props: Props) {
                 label: (
                     <div className={Style.item}>
                         <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]}>
-                            <a>
-                                <HomeOutlined className={Style.icon} />
-                                首页
-                            </a>
+
+                            <HomeOutlined className={Style.icon} />首页
                         </Link>
                     </div>
                 ),
@@ -57,10 +55,10 @@ export function FrameView(props: Props) {
                         label: (
                             <div>
                                 <Link href={getCategoryLink(id)}>
-                                    <a>
-                                        <TagOutlined className={Style.icon} />
-                                        {name}
-                                    </a>
+
+                                    <TagOutlined className={Style.icon} />
+                                    {name}
+
                                 </Link>
                             </div>
                         ),
@@ -72,10 +70,8 @@ export function FrameView(props: Props) {
                 label: (
                     <div className={Style.item}>
                         <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT]}>
-                            <a>
-                                <InfoOutlined className={Style.icon} />
-                                关于
-                            </a>
+
+                            <InfoOutlined className={Style.icon} />关于
                         </Link>
                     </div>
                 ),
