@@ -25,6 +25,16 @@ jobs:
         cache: 'pnpm'
     - name: Install Dependencies
       run: pnpm i
+    - name: Set Up Next.js Cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ github.workspace }}/.next/cache
+          ${{ github.workspace }}/build/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        restore-keys: |
+          ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
+          ${{ runner.os }}-nextjs-
     - name: Build
       run: pnpm build
     - uses: crazy-max/ghaction-github-pages@v3.0.0
