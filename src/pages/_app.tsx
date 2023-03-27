@@ -1,7 +1,6 @@
 import '@/src/globalStyle/color.scss';
 import '@/src/globalStyle/globalStyle.scss';
 import '@/src/globalStyle/highlight.scss';
-import '@/src/moduleConfig/antd';
 import 'antd/dist/reset.css';
 
 import {useMediaQuery} from '@chakra-ui/media-query';

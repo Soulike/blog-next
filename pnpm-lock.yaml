@@ -21,7 +21,6 @@ specifiers:
   highlight.js: ^11.7.0
   husky: ^8.0.3
   lint-staged: ^13.2.0
-  moment: ^2.29.4
   next: ^13.2.4
   prettier: ^2.8.7
   react: ^18.2.0
@@ -36,10 +35,9 @@ dependencies:
   '@chakra-ui/system': 2.5.3_xqp3pgpqjlfxxa3zxu4zoc4fba
   '@emotion/react': 11.10.6_k4en7uapxoluuejoeg6o3ic2aa
   '@emotion/styled': 11.10.6_zor2bu4ftuliqy4oeppgoopsea
-  antd: 5.3.2_jb42yyeu5qxbfieyxjks6malva
+  antd: 5.3.2_biqbaboplfbrettd7655fr4n2y
   axios: 1.3.4
   highlight.js: 11.7.0
-  moment: 2.29.4
   next: 13.2.4_5y7qh6ykubtj2qr2evk3di7hpa
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -920,7 +918,7 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /antd/5.3.2_jb42yyeu5qxbfieyxjks6malva:
+  /antd/5.3.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-AOCZ+5krqvlLPR1v33K2PQtt9XBAC0gUdjxuHltUliE9u2zlZzGT+4DSHTNnw8CtotPV4lFKab3+K+FgdtyTlw==}
     peerDependencies:
       react: '>=16.9.0'
@@ -954,7 +952,7 @@ packages:
       rc-motion: 2.6.3_biqbaboplfbrettd7655fr4n2y
       rc-notification: 5.0.3_biqbaboplfbrettd7655fr4n2y
       rc-pagination: 3.3.1_biqbaboplfbrettd7655fr4n2y
-      rc-picker: 3.3.4_lejchghvacj3hhjkogy3eaalky
+      rc-picker: 3.3.4_mlnkrlbros4rghcauwy625gk7y
       rc-progress: 3.4.1_biqbaboplfbrettd7655fr4n2y
       rc-rate: 2.10.0_biqbaboplfbrettd7655fr4n2y
       rc-resize-observer: 1.3.1_biqbaboplfbrettd7655fr4n2y
@@ -2588,10 +2586,6 @@ packages:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
 
-  /moment/2.29.4:
-    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
-    dev: false
-
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -3147,7 +3141,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /rc-picker/3.3.4_lejchghvacj3hhjkogy3eaalky:
+  /rc-picker/3.3.4_mlnkrlbros4rghcauwy625gk7y:
     resolution: {integrity: sha512-y7muUVAXqcacXXgLERCC9klEClZybOjWrcVZ54glxO5y+UO2MZmBk+ysWhhVHQ0l2nNtY+wj19gk1xnv+5eCxg==}
     engines: {node: '>=8.x'}
     peerDependencies:
@@ -3168,7 +3162,6 @@ packages:
       '@rc-component/trigger': 1.6.2_biqbaboplfbrettd7655fr4n2y
       classnames: 2.3.2
       dayjs: 1.11.7
-      moment: 2.29.4
       rc-util: 5.29.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
