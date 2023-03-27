@@ -1,10 +1,11 @@
-import '@/src/globalStyle/antd.scss';
 import '@/src/globalStyle/color.scss';
 import '@/src/globalStyle/globalStyle.scss';
 import '@/src/globalStyle/highlight.scss';
 import '@/src/moduleConfig/antd';
+import 'antd/dist/reset.css';
 
-import ConfigProvider from 'antd/lib/config-provider';
+import {useMediaQuery} from '@chakra-ui/media-query';
+import {App, ConfigProvider, theme} from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
@@ -15,13 +16,23 @@ import {Frame} from '@/src/components/Frame';
 import {Loading} from '@/src/components/Loading';
 
 function MyApp({Component, pageProps}: AppProps) {
+    const [isDarkMode] = useMediaQuery('(prefers-color-scheme: dark)');
+    
     return (
         <>
             <Suspense fallback={<Loading />}>
-                <ConfigProvider locale={zhCN}>
-                    <Frame>
-                        <Component {...pageProps} />
-                    </Frame>
+                <ConfigProvider
+                    locale={zhCN}
+                    theme={{
+                        algorithm: isDarkMode
+                            ? theme.darkAlgorithm
+                            : theme.defaultAlgorithm,
+                    }}>
+                    <App>
+                        <Frame>
+                            <Component {...pageProps} />
+                        </Frame>
+                    </App>
                 </ConfigProvider>
             </Suspense>
             <Head>

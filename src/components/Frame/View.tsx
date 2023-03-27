@@ -19,6 +19,7 @@ import Style from './Style.module.scss';
 const {Sider, Footer, Content, Header} = Layout;
 
 interface Props {
+    isDarkMode: boolean;
     hitokoto: string;
     year: number;
     categories: Array<Category>;
@@ -27,17 +28,16 @@ interface Props {
 }
 
 export function FrameView(props: Props) {
-    const {hitokoto, year, categories, children, loading} = props;
+    const {isDarkMode, hitokoto, year, categories, children, loading} = props;
+    const theme = isDarkMode ? 'dark' : 'light';
     const menuItems = useMemo(
         () => [
             {
                 label: (
                     <div className={Style.item}>
                         <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.INDEX]}>
-                            <a>
-                                <HomeOutlined className={Style.icon} />
-                                首页
-                            </a>
+
+                            <HomeOutlined className={Style.icon} />首页
                         </Link>
                     </div>
                 ),
@@ -57,10 +57,10 @@ export function FrameView(props: Props) {
                         label: (
                             <div>
                                 <Link href={getCategoryLink(id)}>
-                                    <a>
-                                        <TagOutlined className={Style.icon} />
-                                        {name}
-                                    </a>
+
+                                    <TagOutlined className={Style.icon} />
+                                    {name}
+
                                 </Link>
                             </div>
                         ),
@@ -72,10 +72,8 @@ export function FrameView(props: Props) {
                 label: (
                     <div className={Style.item}>
                         <Link href={PAGE_ID_TO_ROUTE[PAGE_ID.ABOUT]}>
-                            <a>
-                                <InfoOutlined className={Style.icon} />
-                                关于
-                            </a>
+
+                            <InfoOutlined className={Style.icon} />关于
                         </Link>
                     </div>
                 ),
@@ -91,7 +89,7 @@ export function FrameView(props: Props) {
             {!loading && (
                 <>
                     {/*在宽 500px 以上屏幕显示的 Sider*/}
-                    <Sider theme={'light'} className={Style.sidebar}>
+                    <Sider className={Style.sidebar} theme={theme}>
                         <div className={Style.sidebarInner}>
                             <div className={Style.avatarWrapper}>
                                 <img
@@ -125,7 +123,7 @@ export function FrameView(props: Props) {
                                     mode={'horizontal'}
                                     selectable={false}
                                     items={menuItems}
-                                    theme={'light'}
+                                    theme={'dark'}
                                 />
                             </div>
                         </Header>

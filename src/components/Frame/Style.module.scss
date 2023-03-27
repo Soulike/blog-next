@@ -12,10 +12,6 @@
             display: none;
         }
 
-        // overwrite antd
-        background-color: var(--BACKGROUND_COLOR);
-        border-bottom: 1px solid var(--BORDER_COLOR);
-
         display: flex;
         align-items: center;
         width: 100%;
@@ -49,8 +45,6 @@
                 align-items: center;
                 justify-content: flex-end;
 
-                // overwrite antd
-                background-color: var(--BACKGROUND_COLOR);
                 border-bottom: none;
             }
         }
@@ -62,12 +56,7 @@
         flex-basis: auto !important;
         max-width: 17vw !important;
         min-width: 17vw !important;
-        background-color: var(--BACKGROUND_COLOR);
         border-right: 1px solid var(--BORDER_COLOR);
-
-        * {
-            background-color: inherit;
-        }
 
         @media (max-width: 1000px) {
             width: 125px !important;
