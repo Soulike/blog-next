@@ -14,22 +14,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
     - name: Use Node.js LTS
       uses: actions/setup-node@v3
       with:
-        node-version: lts/*
-        cache: 'yarn'
-    - run: yarn
-    - uses: actions/cache@v2
-      with:
-        path: |
-          ${{ github.workspace }}/.next/cache
-          ${{ github.workspace }}/build/cache
-        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-        restore-keys: |
-          ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
-          ${{ runner.os }}-nextjs-
-    - run: yarn build
+        node-version: 'lts/*'
+        cache: 'pnpm'
+    - name: Install Dependencies
+      run: pnpm i
+    - name: Build
+      run: pnpm build
     - uses: crazy-max/ghaction-github-pages@v3.0.0
       with:
         build_dir: 'out'
