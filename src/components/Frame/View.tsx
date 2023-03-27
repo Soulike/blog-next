@@ -19,6 +19,7 @@ import Style from './Style.module.scss';
 const {Sider, Footer, Content, Header} = Layout;
 
 interface Props {
+    isDarkMode: boolean;
     hitokoto: string;
     year: number;
     categories: Array<Category>;
@@ -27,7 +28,8 @@ interface Props {
 }
 
 export function FrameView(props: Props) {
-    const {hitokoto, year, categories, children, loading} = props;
+    const {isDarkMode, hitokoto, year, categories, children, loading} = props;
+    const theme = isDarkMode ? 'dark' : 'light';
     const menuItems = useMemo(
         () => [
             {
@@ -87,7 +89,7 @@ export function FrameView(props: Props) {
             {!loading && (
                 <>
                     {/*在宽 500px 以上屏幕显示的 Sider*/}
-                    <Sider theme={'light'} className={Style.sidebar}>
+                    <Sider className={Style.sidebar} theme={theme}>
                         <div className={Style.sidebarInner}>
                             <div className={Style.avatarWrapper}>
                                 <img
@@ -121,7 +123,7 @@ export function FrameView(props: Props) {
                                     mode={'horizontal'}
                                     selectable={false}
                                     items={menuItems}
-                                    theme={'light'}
+                                    theme={'dark'}
                                 />
                             </div>
                         </Header>

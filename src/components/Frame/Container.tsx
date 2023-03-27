@@ -1,3 +1,4 @@
+import {useMediaQuery} from '@chakra-ui/media-query';
 import {useRouter} from 'next/router';
 import React, {useMemo} from 'react';
 
@@ -14,6 +15,7 @@ export interface IFrameProps {
 export function Frame(props: IFrameProps) {
     const {children} = props;
     const router = useRouter();
+    const [isDarkMode] = useMediaQuery('(prefer-color-scheme: dark)');
 
     // 设定当前年份
     const year = useCurrentYear();
@@ -31,6 +33,7 @@ export function Frame(props: IFrameProps) {
 
     return (
         <FrameView
+            isDarkMode={isDarkMode}
             loading={loading}
             hitokoto={hitokoto}
             year={year}
